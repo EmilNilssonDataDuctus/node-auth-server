@@ -1,5 +1,7 @@
 const createError = require("http-errors");
 
+const { clearTokens } = require("../utils/auth");
+
 const { users } = require("../data/data");
 
 const signUp = async (req, res, next) => {
@@ -83,4 +85,9 @@ const login = async (req, res, next) => {
   }
 };
 
-module.exports = { signUp, login };
+const logout = async (req, res, next) => {
+  await clearTokens(req, res, next);
+  return res.sendStatus(204);
+};
+
+module.exports = { signUp, login, logout };
