@@ -17,7 +17,7 @@ const { users, tokens } = require("../data/data");
 
 const generateAuthTokens = async (req, res, next) => {
   try {
-    const user = user.find((user) => user.id === req.userId);
+    const user = users.find((user) => user.id === req.userId);
 
     const refreshToken = generateJWT(
       req.userId,
