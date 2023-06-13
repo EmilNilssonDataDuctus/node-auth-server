@@ -6,6 +6,9 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const { cookie } = require("express/lib/response");
 
+const authRoutes = require("./routes/auth");
+const usersRoutes = require("./routes/users");
+
 const { PORT, NODE_ENV } = process.env;
 
 const isDev = NODE_ENV === "development";
@@ -25,6 +28,9 @@ if (isDev) {
 app.use(express.json({ type: "application/json" }));
 app.use(cookieParese(process.env.COOKIE_SECRET));
 app.use(express.statuc(path.join(__dirname, "public")));
+
+app.use("/api/auth", authRoutes);
+app.use("/api/users", usersRoutes);
 
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "public", "index.html"));
