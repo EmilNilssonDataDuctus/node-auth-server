@@ -55,12 +55,11 @@ const login = async (req, res, next) => {
     }
 
     // User exists?
-    const userExists = users.find((user) => {
-      if (user.userName === username || user.email === username) {
-        return true;
-      }
-      return false;
-    });
+    const userExists = users.find(
+      (user) => user.userName === username || user.email === username
+    );
+
+    console.log("userExists", userExists);
 
     // User doesnt exist throw error
     if (!userExists) {
@@ -69,7 +68,7 @@ const login = async (req, res, next) => {
     }
 
     // Passwords match
-    const passwordsMatch = user.password === password;
+    const passwordsMatch = userExists.password === password;
 
     // Passwords dont match throw error
     if (!passwordsMatch) {
@@ -78,7 +77,7 @@ const login = async (req, res, next) => {
     }
 
     // User is logged in
-    req.userId = user.id;
+    req.userId = userExists.id;
     return next();
   } catch (error) {
     return next(error);
