@@ -9,6 +9,7 @@ const {
   REFRESH_TOKEN_LIFE,
   ACCESS_TOKEN_SECRET,
   REFRESH_TOKEN_SECRET,
+  NODE_ENV,
 } = process.env;
 
 const dev = NODE_ENV === "development";
